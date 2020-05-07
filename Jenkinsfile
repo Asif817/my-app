@@ -10,7 +10,10 @@ node {
 	url: 'https://github.com/javahometech/myweb'
    
    }
-   
+   stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
    stage('Sonar Publish'){
 	   withCredentials([string(credentialsId: 'sonarqube', variable: 'sonarToken')]) {
         def sonarToken = "sonar.login=${sonarToken}"
